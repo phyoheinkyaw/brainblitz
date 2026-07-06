@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainBlitz — Quiz Challenge</title>
+  <meta name="description"
+    content="Test your knowledge across multiple categories with BrainBlitz — the ultimate quiz challenge app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <meta name="theme-color" content="#5B2D8E" />
+  <link rel="icon" type="image/svg+xml" href="https://phyoheinkyaw.github.io/images/favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- ═══════════ SKIP LINK ═══════════ -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <span id="main-content" tabindex="-1" class="skip-target"></span>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo" data-page="home">
+        <span class="logo-icon"><i class="fas fa-brain"></i></span>
+        <span class="logo-text">Brain<span class="logo-accent">Blitz</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="nav-action-btn" data-page="leaderboard" aria-label="Leaderboard">
+          <i class="fas fa-trophy"></i>
+        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+        <li><a href="#" class="nav-link" data-page="leaderboard"><i class="fas fa-trophy"></i> Leaderboard</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════ PAGE: HOME ═══════════ -->
+  <section class="page active" id="page-home">
+    <div class="container home-content">
+      <div class="home-hero" data-aos="fade-up">
+        <div class="hero-icon"><i class="fas fa-brain"></i></div>
+        <h1 class="hero-title">Welcome to <span class="hero-highlight">BrainBlitz</span></h1>
+        <p class="hero-subtitle">Challenge yourself with exciting quizzes across multiple categories. Test your
+          knowledge, beat the clock, and climb the leaderboard!</p>
+        <button class="btn btn-primary btn-lg" id="startQuizBtn">
+          <i class="fas fa-play"></i> Start Quiz
+        </button>
+      </div>
+
+      <div class="home-features" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-card">
+          <div class="feature-icon purple"><i class="fas fa-layer-group"></i></div>
+          <h3>6 Categories</h3>
+          <p>Science, History, Geography, Tech, Sports, Entertainment</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon blue"><i class="fas fa-gauge-high"></i></div>
+          <h3>3 Difficulties</h3>
+          <p>Easy, Medium, Hard — pick your challenge level</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon teal"><i class="fas fa-clock"></i></div>
+          <h3>Timed Challenges</h3>
+          <p>Race against the clock with 15 seconds per question</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon gold"><i class="fas fa-trophy"></i></div>
+          <h3>Leaderboard</h3>
+          <p>Compete for high scores and track your progress</p>
+        </div>
+      </div>
+
+      <!-- Categories preview -->
+      <div class="home-categories" data-aos="fade-up" data-aos-delay="200">
+        <h2>Choose Your <span class="hero-highlight">Category</span></h2>
+        <div class="category-grid" id="homeCategoryGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAGE: SETUP ═══════════ -->
+  <section class="page" id="page-setup">
+    <div class="container">
+      <div class="setup-card" data-aos="fade-up">
+        <div class="setup-header">
+          <i class="fas fa-sliders-h"></i>
+          <h2>Quiz Setup</h2>
+          <p>Configure your quiz challenge</p>
+        </div>
+
+        <div class="setup-section">
+          <h4><i class="fas fa-layer-group"></i> Category</h4>
+          <div class="option-grid" id="categoryOptions"></div>
+        </div>
+
+        <div class="setup-section">
+          <h4><i class="fas fa-gauge-high"></i> Difficulty</h4>
+          <div class="option-row" id="difficultyOptions">
+            <label class="option-btn active">
+              <input type="radio" name="difficulty" value="easy" checked />
+              <span><i class="fas fa-seedling"></i> Easy</span>
+            </label>
+            <label class="option-btn">
+              <input type="radio" name="difficulty" value="medium" />
+              <span><i class="fas fa-bolt"></i> Medium</span>
+            </label>
+            <label class="option-btn">
+              <input type="radio" name="difficulty" value="hard" />
+              <span><i class="fas fa-skull"></i> Hard</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h4><i class="fas fa-list-ol"></i> Questions</h4>
+          <div class="option-row" id="questionCountOptions">
+            <label class="option-btn active">
+              <input type="radio" name="qcount" value="5" checked />
+              <span>5</span>
+            </label>
+            <label class="option-btn">
+              <input type="radio" name="qcount" value="10" />
+              <span>10</span>
+            </label>
+            <label class="option-btn">
+              <input type="radio" name="qcount" value="15" />
+              <span>15</span>
+            </label>
+            <label class="option-btn">
+              <input type="radio" name="qcount" value="20" />
+              <span>20</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <h4><i class="fas fa-user"></i> Your Name</h4>
+          <input type="text" id="playerName" placeholder="Enter your name" maxlength="20" />
+        </div>
+
+        <button class="btn btn-primary btn-full btn-lg" id="beginQuizBtn">
+          <i class="fas fa-play"></i> Begin Quiz!
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAGE: QUIZ ═══════════ -->
+  <section class="page" id="page-quiz">
+    <div class="container">
+      <!-- Quiz Header -->
+      <div class="quiz-header" data-aos="fade-down">
+        <div class="quiz-meta">
+          <span class="quiz-category" id="quizCategory">Science</span>
+          <span class="quiz-difficulty" id="quizDifficulty">Easy</span>
+        </div>
+        <div class="quiz-player" id="quizPlayer">Player</div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="quiz-progress" data-aos="fade-up">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">1 / 10</div>
+      </div>
+
+      <!-- Timer -->
+      <div class="quiz-timer" id="quizTimer" data-aos="fade-up">
+        <div class="timer-ring">
+          <svg viewBox="0 0 100 100">
+            <circle class="timer-bg" cx="50" cy="50" r="45" />
+            <circle class="timer-fill" id="timerFill" cx="50" cy="50" r="45" />
+          </svg>
+          <span class="timer-text" id="timerText">15</span>
+        </div>
+      </div>
+
+      <!-- Question -->
+      <div class="quiz-question" data-aos="fade-up">
+        <h2 id="questionText">Loading question...</h2>
+      </div>
+
+      <!-- Answers -->
+      <div class="quiz-answers" id="quizAnswers" data-aos="fade-up"></div>
+
+      <!-- Score Display -->
+      <div class="quiz-scorebar">
+        <div class="score-item correct"><i class="fas fa-check"></i> <span id="correctCount">0</span></div>
+        <div class="score-item incorrect"><i class="fas fa-times"></i> <span id="incorrectCount">0</span></div>
+        <div class="score-item score"><i class="fas fa-star"></i> <span id="currentScore">0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAGE: RESULTS ═══════════ -->
+  <section class="page" id="page-results">
+    <div class="container">
+      <div class="results-card" data-aos="fade-up">
+        <div class="results-icon" id="resultsIcon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <h2 class="results-title" id="resultsTitle">Great Job!</h2>
+        <div class="results-score" id="resultsScoreDisplay">
+          <span class="results-score-num" id="resultsScore">85</span>
+          <span class="results-score-label">points</span>
+        </div>
+        <div class="results-stats">
+          <div class="result-stat">
+            <span class="stat-icon correct"><i class="fas fa-check-circle"></i></span>
+            <span class="stat-value" id="resultsCorrect">0</span>
+            <span class="stat-label">Correct</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-icon incorrect"><i class="fas fa-times-circle"></i></span>
+            <span class="stat-value" id="resultsIncorrect">0</span>
+            <span class="stat-label">Incorrect</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-icon accuracy"><i class="fas fa-bullseye"></i></span>
+            <span class="stat-value" id="resultsAccuracy">0%</span>
+            <span class="stat-label">Accuracy</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-icon time"><i class="fas fa-clock"></i></span>
+            <span class="stat-value" id="resultsTime">0s</span>
+            <span class="stat-label">Avg Time</span>
+          </div>
+        </div>
+
+        <div class="results-breakdown" id="resultsBreakdown"></div>
+
+        <div class="results-actions">
+          <button class="btn btn-primary" id="retryBtn"><i class="fas fa-redo"></i> Play Again</button>
+          <button class="btn btn-outline" id="leaderboardBtn"><i class="fas fa-trophy"></i> Leaderboard</button>
+          <button class="btn btn-secondary" data-page="home"><i class="fas fa-home"></i> Home</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAGE: LEADERBOARD ═══════════ -->
+  <section class="page" id="page-leaderboard">
+    <div class="container">
+      <div class="lb-header" data-aos="fade-up">
+        <i class="fas fa-trophy"></i>
+        <h2>Leaderboard</h2>
+        <p>The brightest minds of BrainBlitz</p>
+      </div>
+
+      <div class="lb-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="lb-table-container">
+          <table class="lb-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+                <th>Correct</th>
+                <th>Category</th>
+                <th>Difficulty</th>
+              </tr>
+            </thead>
+            <tbody id="lbBody"></tbody>
+          </table>
+        </div>
+        <div class="lb-empty" id="lbEmpty">
+          <i class="fas fa-trophy"></i>
+          <h3>No scores yet</h3>
+          <p>Be the first to make the leaderboard!</p>
+          <button class="btn btn-primary" id="lbStartBtn"><i class="fas fa-play"></i> Take a Quiz</button>
+        </div>
+      </div>
+
+      <div class="lb-actions" data-aos="fade-up">
+        <button class="btn btn-outline" id="clearLbBtn"><i class="fas fa-trash-alt"></i> Clear All Scores</button>
+        <a href="#" class="btn btn-secondary" data-page="home"><i class="fas fa-home"></i> Home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TOAST CONTAINER ═══════════ -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <span class="logo-icon"><i class="fas fa-brain"></i></span>
+            <span class="logo-text">Brain<span class="logo-accent">Blitz</span></span>
+          </div>
+          <p>Test your knowledge. Challenge yourself. Climb the ranks.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#" data-page="home">Home</a>
+          <a href="#" data-page="leaderboard">Leaderboard</a>
+        </div>
+        <div class="footer-links">
+          <p>Categories: Science, History, Geography, Technology, Sports, Entertainment</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BrainBlitz. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
